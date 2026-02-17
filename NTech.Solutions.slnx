@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="NTech.Solutions.Api/NTech.Solutions.Api.csproj" />
+    <Project Path="NTech.Solutions.Blazor.Web/NTech.Solutions.Blazor.Web.csproj" />
+    <Project Path="NTech.Solutions.Common/NTech.Solutions.Common.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="NTech.Solutions.Tests/NTech.Solutions.Tests.csproj" />
+  </Folder>
+</Solution>
