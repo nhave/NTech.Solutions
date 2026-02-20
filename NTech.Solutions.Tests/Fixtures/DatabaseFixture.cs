@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NTech.Solutions.Api.Data;
 using Testcontainers.PostgreSql;
 
 namespace NTech.Solutions.Tests.Fixtures
@@ -7,42 +8,44 @@ namespace NTech.Solutions.Tests.Fixtures
     public class DatabaseFixture : IAsyncLifetime
     {
         public IServiceProvider Services;
-        //private PostgreSqlContainer _container;
+        private PostgreSqlContainer _container;
 
         public DatabaseFixture()
         {
-            //_container = new PostgreSqlBuilder("postgres")
-            //    .Build();
+            _container = new PostgreSqlBuilder("postgres")
+                .Build();
 
             var coll = new ServiceCollection();
 
-            //coll.AddTransient<IConfiguration>(_ =>
-            //{
-            //    var configs = new List<KeyValuePair<string, string?>>
-            //    {
-            //        new ("ConnectionStrings:PostgresDb", _container.GetConnectionString())
-            //    };
+            coll.AddTransient<IConfiguration>(_ =>
+            {
+                var configs = new List<KeyValuePair<string, string?>>
+                {
+                    new ("ConnectionStrings:PostgresDb", _container.GetConnectionString())
+                };
 
-            //    return new ConfigurationBuilder()
-            //        .AddInMemoryCollection(configs)
-            //        .Build();
-            //});
+                return new ConfigurationBuilder()
+                    .AddInMemoryCollection(configs)
+                    .Build();
+            });
 
-            //coll.AddDbContext<AppDbContext>();
+            coll.AddDbContext<AppDbContext>();
+            //coll.AddServices();
+            //coll.AddRepositories();
 
             Services = coll.BuildServiceProvider();
         }
 
         public async Task InitializeAsync()
         {
-            //await _container.StartAsync();
-            //var context = Services.GetRequiredService<AppDbContext>();
-            //await context.Database.EnsureCreatedAsync();
+            await _container.StartAsync();
+            var context = Services.GetRequiredService<AppDbContext>();
+            await context.Database.EnsureCreatedAsync();
         }
 
         public async Task DisposeAsync()
         {
-            //await _container.StopAsync();
+            await _container.StopAsync();
         }
     }
 }

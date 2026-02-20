@@ -1,23 +1,52 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+<Navbar Color="#efdf00">
+    <StartTemplate>
+        <NavLink class="nav-item nav-link" href="demo">
+            <Icon Name="IconName.InfoSquareFill" Class="me-1" />Demo
+        </NavLink>
+        <NavLink class="nav-item nav-link" href="counter">
+            <Icon Name="IconName.PlusSquareFill" Class="me-1" />Counter
+        </NavLink>
+        <NavLink class="nav-item nav-link" href="weather">
+            <Icon Name="IconName.ListNested" Class="me-1" />Weather
+        </NavLink>
+    </StartTemplate>
+    <EndTemplate>
+        <NavLink class="nav-item nav-link" href="signin">
+            Sign in
+        </NavLink>
+        <ThemeMenu />
+    </EndTemplate>
+    <CollapsedTemplate>
+        <Avatar Size="40" />
+    </CollapsedTemplate>
+</Navbar>
+
+<ScrollingTextBG Text="N-TECH SOLUTIONS" Color="#efdf00" />
+
+<main>
+    <div class="container-xxl my-5">
+        @Body
     </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+</main>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
-
-<div id="blazor-error-ui" data-nosnippet>
-    An unhandled error has occurred.
-    <a href="." class="reload">Reload</a>
-    <span class="dismiss">🗙</span>
-</div>
+<Footer>
+    <StartTemplate>
+        <a href="/" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1">
+            <img src="_content/NTech.Blazor/favicon.png" height="40" />
+        </a>
+        <span class="">© 2026 N-Tech</span>
+    </StartTemplate>
+    <EndTemplate>
+        <a class="nav-link no-drag" href="https://github.com/nhave/NTech.Blazor" target="_blank">
+            <Icon Name="IconName.Github" />
+        </a>
+    </EndTemplate>
+</Footer>

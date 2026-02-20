@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blazor.Bootstrap" Version="3.5.0" />
+    <PackageReference Include="NTech.Blazor" Version="1.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NTech.Solutions.Common\NTech.Solutions.Common.csproj" />
   </ItemGroup>
 

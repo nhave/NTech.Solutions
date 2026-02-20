@@ -1,3 +1,4 @@
+using NTech.Solutions.Api.Data;
 
 namespace NTech.Solutions.Api
 {
@@ -8,6 +9,9 @@ namespace NTech.Solutions.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -19,10 +23,22 @@ namespace NTech.Solutions.Api
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwaggerUI(options =>
+                {
+                    //options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.SwaggerEndpoint("/openapi/v1.json", "v1");
+                    options.RoutePrefix = "swagger";
+
+                    //options.OAuthAppName("NTech.Solutions.Api");
+
+                    options.AddSwaggerBootstrap()
+                        .AddExperimentalFeatures();
+                });
             }
 
-            app.UseAuthorization();
+            app.UseStaticFiles();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
